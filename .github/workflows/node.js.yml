@@ -32,10 +32,14 @@ jobs:
         
     - name: Install dependencies
       run: yarn install
-
+      
     - name: Build
       run: yarn build
+      
+  test:
+    runs-on: ubuntu-latest
 
+    steps:
     - name: Run unit tests
       run: yarn test
       continue-on-error: true
@@ -45,6 +49,6 @@ jobs:
       continue-on-error: true
 
     - name: Report JUnit test results
-      uses: actions/junit-report@v2
+      uses: EnricoMi/publish-unit-test-result-action@v1
       with:
         test_results: reports/*.xml
